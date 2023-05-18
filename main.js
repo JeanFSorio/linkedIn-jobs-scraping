@@ -31,7 +31,7 @@ const timeoutDuration = 3000;
   const encodedKeyword = encodeURIComponent(keyword);
   const encodedLocation = encodeURIComponent(locationuri);
   
-  for (let pageNumber = 0; pageNumber < 25; pageNumber += 25) {
+  for (let pageNumber = 0; pageNumber < 1000; pageNumber += 25) {
     const searchUrl = `https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=${encodedKeyword}&location=${encodedLocation}&position=1&pageNum=0&start=${pageNumber}`;
     
     await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 60000  });
