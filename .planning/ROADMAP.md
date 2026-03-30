@@ -9,9 +9,9 @@
 ## Phases
 
 - [x] **Phase 1: Foundation** - Secure credentials and CLI interface
-- [ ] **Phase 2: Reliability** - Error handling, rate limiting, pagination control
-- [ ] **Phase 3: Data Quality** - Duplicate detection and CSV export
-- [ ] **Phase 4: Quality Assurance** - Test coverage
+- [x] **Phase 2: Reliability** - Error handling, rate limiting, pagination control
+- [x] **Phase 3: Data Quality** - Duplicate detection and CSV export
+- [x] **Phase 4: Quality Assurance** - Test coverage
 
 ---
 
@@ -35,7 +35,7 @@
 **Plans:** 1 plan
 
 Plans:
-- [ ] 01-foundation-01-PLAN.md — Secure credentials and CLI arguments
+- [x] 01-foundation-01-PLAN.md — Secure credentials and CLI arguments
 
 ---
 
@@ -54,7 +54,12 @@ Plans:
 4. Log output shows retry attempts and rate limit delays
 5. Max pages can be overridden via `--max-pages` argument
 
-**Plans:** TBD
+**Plans:** 3 plans
+
+Plans:
+- [x] 02-reliability-01-PLAN.md — Retry logic and timeout handling
+- [x] 02-reliability-02-PLAN.md — Rate limiting
+- [x] 02-reliability-03-PLAN.md — Pagination control
 
 ---
 
@@ -73,7 +78,10 @@ Plans:
 4. CSV contains all fields: title, company, location, insight, link, description
 5. CSV file saved to `exports/jobs_YYYYMMDD_HHMMSS.csv`
 
-**Plans:** TBD
+**Plans:** 1 plan
+
+Plans:
+- [x] 03-data-quality-01-PLAN.md — Duplicate detection and CSV export
 
 ---
 
@@ -92,7 +100,10 @@ Plans:
 4. Tests verify duplicate detection logic
 5. Tests verify CLI argument parsing
 
-**Plans:** TBD
+**Plans:** 1 plan
+
+Plans:
+- [x] 04-quality-assurance-01-PLAN.md — Jest test framework
 
 ---
 
@@ -101,9 +112,9 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 1/1 | Complete | 2026-03-30 |
-| 2. Reliability | 1/3 | In progress | - |
-| 3. Data Quality | 0/2 | Not started | - |
-| 4. Quality Assurance | 0/1 | Not started | - |
+| 2. Reliability | 3/3 | Complete | 2026-03-30 |
+| 3. Data Quality | 1/1 | Complete | 2026-03-30 |
+| 4. Quality Assurance | 1/1 | Complete | 2026-03-30 |
 
 ---
 
