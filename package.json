@@ -5,7 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/__tests__/**/*.js", "**/*.test.js"],
+    "collectCoverageFrom": ["*.js", "!node_modules"],
+    "coverageDirectory": "coverage"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +25,8 @@
     "puppeteer": "^20.2.1",
     "sqlite": "^4.2.0",
     "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "jest": "^30.3.0"
   }
 }
