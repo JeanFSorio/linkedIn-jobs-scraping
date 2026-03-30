@@ -35,6 +35,10 @@ function getDelay() {
   return parseInt(process.env.REQUEST_DELAY_MS) || 2000;
 }
 
+function getExportConfig() {
+  return process.argv.includes('--export-csv') || process.argv.includes('-e');
+}
+
 function validateEnvironment() {
   getCredentials();
   return true;
@@ -44,5 +48,6 @@ module.exports = {
   getCredentials,
   getSearchConfig,
   validateEnvironment,
-  getDelay
+  getDelay,
+  getExportConfig
 };

@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const saveToDb = require('./database.js');
-const { getCredentials, getSearchConfig, validateEnvironment, getDelay } = require('./config.js');
+const exportToCsv = require('./exportCsv.js');
+const { getCredentials, getSearchConfig, validateEnvironment, getDelay, getExportConfig } = require('./config.js');
 
 const MAX_RETRIES = 3;
 const BACKOFF_DELAYS = [1000, 2000, 4000];
@@ -125,6 +126,13 @@ async function gotoWithRetry(page, url, options = {}) {
 
   await browser.close();
 
-  saveToDb(linkedinJobs)
+  const exportCsv = getExportConfig();
+  const duplicatesSkipped = saveToDb(linkedinJobs);
+  console.log(`Skipped ${duplicatesSkipped} duplicate jobs`);
+
+  if (exportCsv) {
+    const filepath = exportToCsv(linkedinJobs);
+    console.log(`Exported jobs to ${filepath}`);
+  }
 
 })();
