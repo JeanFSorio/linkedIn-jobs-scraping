@@ -1,10 +1,5 @@
 const { Command } = require('commander');
 
-/**
- * Get LinkedIn credentials from environment variables.
- * @returns {{ email: string, password: string }} Credentials object
- * @throws {Error} If credentials are missing
- */
 function getCredentials() {
   const email = process.env.LINKEDIN_EMAIL;
   const password = process.env.LINKEDIN_PASSWORD;
@@ -16,10 +11,6 @@ function getCredentials() {
   return { email, password };
 }
 
-/**
- * Get search configuration from CLI arguments.
- * @returns {{ keyword: string, location: string }} Search config
- */
 function getSearchConfig() {
   const program = new Command();
 
@@ -27,22 +18,23 @@ function getSearchConfig() {
     .name('main.js')
     .description('LinkedIn Jobs Scraping Tool')
     .option('-k, --keyword <value>', 'Search keyword', 'developer')
-    .option('-l, --location <value>', 'Search location', 'Brazil');
+    .option('-l, --location <value>', 'Search location', 'Brazil')
+    .option('-m, --max-pages <number>', 'Maximum number of pages to scrape (0 = unlimited)', '0');
 
   program.parse(process.argv);
   const options = program.opts();
 
   return {
     keyword: options.keyword,
-    location: options.location
+    location: options.location,
+    maxPages: parseInt(options.maxPages) || 0
   };
 }
 
-/**
- * Validate that the environment has required credentials.
- * @returns {boolean} True if valid
- * @throws {Error} If credentials are missing
- */
+function getDelay() {
+  return parseInt(process.env.REQUEST_DELAY_MS) || 2000;
+}
+
 function validateEnvironment() {
   getCredentials();
   return true;
@@ -51,5 +43,6 @@ function validateEnvironment() {
 module.exports = {
   getCredentials,
   getSearchConfig,
-  validateEnvironment
+  validateEnvironment,
+  getDelay
 };
