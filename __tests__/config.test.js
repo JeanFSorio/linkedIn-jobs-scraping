@@ -1,4 +1,4 @@
-const { getCredentials, getSearchConfig, validateEnvironment, getDelay, getExportConfig } = require('../config.js');
+const { getCredentials, getSearchConfig, validateEnvironment, getDelay } = require('../config.js');
 
 describe('getCredentials', () => {
   const originalEnv = process.env;
@@ -49,6 +49,8 @@ describe('getSearchConfig', () => {
     expect(config.keyword).toBe('developer');
     expect(config.location).toBe('Brazil');
     expect(config.maxPages).toBe(0);
+    expect(config.exportCsv).toBe(false);
+    expect(config.remoteOnly).toBe(false);
   });
 
   test('parses --keyword argument', () => {
@@ -86,6 +88,35 @@ describe('getSearchConfig', () => {
     const config = getSearchConfig();
     expect(config.maxPages).toBe(10);
   });
+
+  test('parses --export-csv argument', () => {
+    process.argv = ['node', 'main.js', '--export-csv'];
+    const config = getSearchConfig();
+    expect(config.exportCsv).toBe(true);
+  });
+
+  test('parses -e shorthand for export-csv', () => {
+    process.argv = ['node', 'main.js', '-e'];
+    const config = getSearchConfig();
+    expect(config.exportCsv).toBe(true);
+  });
+
+  test('parses --remote-only argument', () => {
+    process.argv = ['node', 'main.js', '--remote-only'];
+    const config = getSearchConfig();
+    expect(config.remoteOnly).toBe(true);
+  });
+
+  test('parses -r shorthand for remote-only', () => {
+    process.argv = ['node', 'main.js', '-r'];
+    const config = getSearchConfig();
+    expect(config.remoteOnly).toBe(true);
+  });
+
+  test('returns false for remote-only when not provided', () => {
+    const config = getSearchConfig();
+    expect(config.remoteOnly).toBe(false);
+  });
 });
 
 describe('getDelay', () => {
@@ -110,34 +141,5 @@ describe('getDelay', () => {
     process.env.REQUEST_DELAY_MS = '5000';
     const delay = getDelay();
     expect(delay).toBe(5000);
-  });
-});
-
-describe('getExportConfig', () => {
-  const originalArgv = process.argv;
-
-  beforeEach(() => {
-    process.argv = ['node', 'main.js'];
-  });
-
-  afterAll(() => {
-    process.argv = originalArgv;
-  });
-
-  test('returns false when --export-csv not provided', () => {
-    const result = getExportConfig();
-    expect(result).toBe(false);
-  });
-
-  test('returns true when --export-csv is provided', () => {
-    process.argv.push('--export-csv');
-    const result = getExportConfig();
-    expect(result).toBe(true);
-  });
-
-  test('returns true when -e shorthand is provided', () => {
-    process.argv.push('-e');
-    const result = getExportConfig();
-    expect(result).toBe(true);
   });
 });

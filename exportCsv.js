@@ -11,12 +11,13 @@ function exportToCsv(jobs, filename = null) {
   const timestamp = new Date().toISOString().replace(/[-:]/g, '').replace('T', '_').slice(0, 15);
   const filepath = filename || path.join(exportDir, `jobs_${timestamp}.csv`);
 
-  const headers = ['title', 'company', 'location', 'insight', 'link', 'description'];
+  const headers = ['foundAt', 'jobId', 'title', 'company', 'location', 'insight', 'link', 'description', 'match', 'match_words'];
   const csvRows = [headers.join(',')];
 
   jobs.forEach(job => {
     const row = headers.map(header => {
-      const value = job[header.charAt(0).toUpperCase() + header.slice(1)] || '';
+      const key = header === 'foundAt' ? 'FoundAt' : header.charAt(0).toUpperCase() + header.slice(1);
+      const value = job[key] || '';
       // Escape quotes and wrap in quotes if contains comma
       const escaped = value.replace(/"/g, '""');
       return `"${escaped}"`;

@@ -2,16 +2,24 @@
   "name": "webscrappingnode",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node index",
+    "start": "node main.js",
+    "score": "node score.js",
+    "analyze": "node analyze.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "jest": {
     "testEnvironment": "node",
-    "testMatch": ["**/__tests__/**/*.js", "**/*.test.js"],
-    "collectCoverageFrom": ["*.js", "!node_modules"],
+    "testMatch": [
+      "**/__tests__/**/*.js",
+      "**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "*.js",
+      "!node_modules"
+    ],
     "coverageDirectory": "coverage"
   },
   "keywords": [],
@@ -21,7 +29,10 @@
     "axios": "^1.3.4",
     "cheerio": "^1.0.0-rc.12",
     "commander": "^12.0.0",
+    "dotenv": "^17.3.1",
     "objects-to-csv": "^1.3.6",
+    "pdf-parse": "^2.4.5",
+    "pdf2json": "^4.0.2",
     "puppeteer": "^20.2.1",
     "sqlite": "^4.2.0",
     "sqlite3": "^5.1.6"
